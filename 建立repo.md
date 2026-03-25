@@ -172,6 +172,14 @@ git push origin v1.0
 
 在 Termux：
 
+#方法A:
+
+git clone https://github.com/m1k3li/netscan-tools.git
+cd netscan-tools
+chmod +x *.sh
+
+#方法B:
+
 ```bash
 git clone git@github.com:<你的帳號>/netscan-tools.git
 cd netscan-tools

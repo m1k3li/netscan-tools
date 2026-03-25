@@ -2,12 +2,21 @@
 # 先 pkg install arp-scan dnsutils
 echo "===== NETSCAN ULTIMATE ====="
 
-# ===== root 檢查 =====
-if [ "$(id -u)" -ne 0 ]; then
-  echo "[!] Switching to root..."
-  exec su -c "$0 $@"
+# ==== TERMUX / ROOT FRIENDLY INIT ====
+TERMUX_PREFIX="/data/data/com.termux/files/usr"
+export PATH="$TERMUX_PREFIX/bin:$PATH"
+
+# 嘗試 root
+if [[ $EUID -ne 0 ]]; then
+    echo "[!] Not running as root. Trying with su..."
+    if command -v su >/dev/null 2>&1; then
+        exec su -c "$0 $*"  # 重新用 su 執行整個 script
+    else
+        echo "[!] su not found. Continuing without root..."
+    fi
 fi
 
+echo "===== NETSCAN ULTIMATE (ROOT MODE) ====="
 # ===== 取得 interface =====
 IFACE=$(ip route | grep default | awk '{print $5}' | head -n1)
 

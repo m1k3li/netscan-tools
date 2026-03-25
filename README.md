@@ -1,4 +1,4 @@
-cat > README.md << 'EOF'
+
 # Netscan Tools
 
 A collection of network scanning tools designed for Termux / Linux environments.
@@ -36,5 +36,3 @@ chmod +x *.sh
 Some features require root
 Designed for quick network troubleshooting
 
-EOF
-#a test for git update.
